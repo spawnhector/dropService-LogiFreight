@@ -1,0 +1,35 @@
+
+#drop_content {
+    background-color:#eee;
+    text-align:center;
+    padding:0px 0px;
+    height:250px;
+    line-height:250px;
+    border:2px dashed #ccc;
+    border-radius:10px;
+  } #drop_content span {
+        font-weight:800;
+        color:#888;
+    }
+  
+  
+  #drop_content.highlight {
+    border-color:#2B83B8;
+    background-color:#DBF1FF;
+  } #drop_content.highlight span {
+        color:#2B83B8;
+    }
+  
+  
+  #size-select {
+    padding:10px 0;
+  }
+  
+  #size-select #size {
+    width:100%;
+  }
+  
+  #myCanvas {
+    border:1px solid #eee;
+    box-shadow:2px 2px 15px rgba(0,0,0,.1);
+  }
