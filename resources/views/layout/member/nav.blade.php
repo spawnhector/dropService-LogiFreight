@@ -1,15 +1,16 @@
 <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light">
     <div class="container position-relative">
-        <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4" href="../../index.html">
-            <img class="navbar-brand-dark" src="{{ asset('img/brand/dark.svg') }}" alt="Logo light">
-            <img class="navbar-brand-light" src="{{ asset('img/brand/dark.svg') }}" alt="Logo dark">
-        </a>
+        <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4"
+                href="#">
+                LOGIFREIGHT
+            </a>
         <div class="navbar-collapse collapse" id="navbar_global">
             <div class="navbar-collapse-header">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a href="../../index.html" class="navbar-brand shadow-soft py-2 px-3 rounded border border-light">
-                            <img src="{{ asset('img/brand/dark.svg') }}" alt="Themesberg logo">
+                        <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4"
+                            href="#">
+                            LOGIFREIGHT
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -49,7 +50,7 @@
                         </li>
                     </ul>
                 </li> --}}
-                <li class="nav-item dropdown mega-dropdown">
+                {{-- <li class="nav-item dropdown mega-dropdown">
                     <a href="#" class="nav-link" data-toggle="dropdown">
                         <span class="nav-link-inner-text">Components</span>
                         <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
@@ -141,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <button type="button" class="btn btn-primary mr-3">Notifications <span class="badge badge-pill badge-success">5</span> <span class="sr-only">unread messages</span></button>

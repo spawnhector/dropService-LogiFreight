@@ -297,7 +297,7 @@ class Index extends Component
 
     public function viewPreAlert($id){
         $this->viewPreAlert = true;
-        $this->slide_enable = false;
+        // $this->slide_enable = false;
         $this->active_screen = 3;
         // in_array()
         // $this->emit('viewPreAlert',$id);
