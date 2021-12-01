@@ -1,0 +1,13 @@
+.btn_out {
+    display: none;
+}
+.btn_in:hover .btn_out {
+    display: block;
+}
+
+.producthunt-badge {
+    position: fixed;
+    top: 189px;
+    right: 6px;
+    z-index: 99;
+}

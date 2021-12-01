@@ -8,7 +8,8 @@ class Index extends Component
 {
     public $completeProgress;
     public $progress;
-    public $member,
+    public 
+    $member,
     $member_info,
     $preAlert,
     $edit_nm,
@@ -26,11 +27,14 @@ class Index extends Component
     $edit_address,
     $address,
     $edit_trn,
-    $trn;
+    $trn,
+    $viewPreAlert,
+    $active_screen = 1,
+    $slide_enable = true;
 
     protected $listeners =[
         'refreshField'=>'refreshField',
-        'openModal'
+        'openModal',
     ];
 
     public function render()
@@ -289,6 +293,15 @@ class Index extends Component
             return false;
         }
         
+    }
+
+    public function viewPreAlert($id){
+        $this->viewPreAlert = true;
+        $this->slide_enable = false;
+        $this->active_screen = 3;
+        // in_array()
+        // $this->emit('viewPreAlert',$id);
+        // array_push()
     }
 
 }

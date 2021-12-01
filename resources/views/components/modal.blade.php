@@ -1,4 +1,5 @@
 <div>
+    
     <button 
         @if (isset($hidden))
             {{$hidden}}
@@ -12,7 +13,7 @@
         type="button"
     >
         {{$button}}
-    </button>
+    </button> 
     <div 
     class="modal fade" 
     id="{{$modal_nm}}" tabindex="-1" role="dialog" aria-labelledby="{{$modal_nm}}"

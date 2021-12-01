@@ -18,19 +18,37 @@
                 </div>
             </div>
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link" data-toggle="dropdown">
-                        <span class="nav-link-inner-text">Pages</span>
+                        <span class="nav-link-inner-text">pre-alert</span>
                         <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="../../html/pages/about.html">About</a></li>
-                        <li><a class="dropdown-item" href="../../html/pages/pricing.html">Pricing</a></li>
-                        <li><a class="dropdown-item" href="../../html/pages/contact.html">Contact</a></li>
-                        <li><a class="dropdown-item" href="../../html/pages/sign-in.html">Sign in</a></li>
-                        <li><a class="dropdown-item" href="../../html/pages/sign-up.html">Sign up</a></li>
+                        <li>
+                            <x-modal>
+                                <x-slot name="modal_nm">
+                                    createPreAlert1
+                                </x-slot>
+                                <x-slot name="modal_body_class">
+                                    modal-dialog modal-dialog-centered modal-lg
+                                </x-slot>
+                                <x-slot name="button">
+                                    <span class="dropdown-item">Create</span>
+                                </x-slot>
+                                <x-slot name="head">
+                                    Create Pre-Alert
+                                </x-slot>
+                                <x-slot name="cardBody">
+                                    @livewire('member.createprealert')
+                                </x-slot>
+                                <x-slot name="btn_class">
+                                </x-slot>
+                                <x-slot name="btn_type">
+                                </x-slot>
+                            </x-modal>
+                        </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="nav-item dropdown mega-dropdown">
                     <a href="#" class="nav-link" data-toggle="dropdown">
                         <span class="nav-link-inner-text">Components</span>

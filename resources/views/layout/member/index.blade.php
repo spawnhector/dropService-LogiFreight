@@ -30,6 +30,7 @@
     <!-- Pixel CSS -->
     <link type="text/css" href="{{ asset('css/neumorphism.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/drag.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
     @livewireScripts
     @livewireStyles
@@ -49,20 +50,37 @@
     <script src="{{ asset('vendor/jquery-countdown/dist/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
     <script src="{{ asset('vendor/prismjs/prism.js') }}"></script>
-    <script src="{{ asset('js/drag.js') }}"></script>
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <!-- Neumorphism JS -->
     <script src="{{ asset('js/neumorphism.js') }}"></script>
+    
+    <script src="{{ asset('js/drag.js') }}"></script>
     <script>
         Livewire.on('refreshField', postId => {
             $('.close').click()
         })
-        Livewire.on('openModal', postId => {
-            $('.completeProg').click()
-        })
+        // Livewire.on('openModal', postId => {
+        //     $('.completeProg').click()
+        // })
+        // Livewire.on('viewPreAlert', viewtId => {
+        //     // $('.completeProg').click()
+        //     alert(viewtId)
+        // })
     </script>
+    <style>
+        .main-arrow-left{
+            position: fixed;
+            top: 18%;
+            left: 2%;
+        }
+        .main-arrow-right{
+            position: fixed;
+            top: 18%;
+            right: 2%;
+        }
+    </style>
 </head>
 
 <body>
