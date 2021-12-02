@@ -55,20 +55,15 @@
 
     <!-- Neumorphism JS -->
     <script src="{{ asset('js/neumorphism.js') }}"></script>
-    
     <script src="{{ asset('js/drag.js') }}"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.2.4/dist/cdn.min.js"></script>
+    
     <script>
         Livewire.on('refreshField', postId => {
             $('.close').click()
         })
-        // Livewire.on('openModal', postId => {
-        //     $('.completeProg').click()
-        // })
-        // Livewire.on('viewPreAlert', viewtId => {
-        //     // $('.completeProg').click()
-        //     alert(viewtId)
-        // })
     </script>
+
     <style>
         .main-arrow-left{
             position: fixed;

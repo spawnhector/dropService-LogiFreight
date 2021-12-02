@@ -61,7 +61,15 @@ class Createprealert extends Component
             ];
         }
         $result = curl(''.domain('8080').'/api/member/prealert/create','POST',$fields);
-        // dd($result);
+        isset($result['success'])
+            ? redirecto('member.dashboard')->with([
+                'mainResult'=>$result['success'],
+                'resultType'=>'success'
+            ])
+            : redirecto('member.dashboard')->with([
+                'mainResult'=>$result['error'],
+                'resultType'=>'error'
+            ]);
     }
 
     public function render()

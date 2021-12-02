@@ -64,7 +64,7 @@ class Signup extends Component
         $response = json_decode(curl_exec($curl));
 
         curl_close($curl);
-        $response->token
+        isset($response->token)
             ? redirecto('member.dashboard',$response->token)
             :dd('no');
     }

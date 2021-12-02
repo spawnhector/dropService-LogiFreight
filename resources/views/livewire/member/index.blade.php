@@ -1,42 +1,72 @@
 <div>
+    @if (session()->has('mainResult'))
+        <div x-data="{ show: true }">
+            <div  x-show="show" class="alert alert-success alert-dismissible shadow-soft fade show pop-alert" role="alert">
+                @if (session('resultType') == 'success')
+                    <span class="alert-inner--icon">
+                        <span class="far fa-thumbs-up"></span>
+                    </span> 
+                    <span class="alert-inner--text">
+                        <strong>Nice!</strong>
+                        {{session()->pull('mainResult')}}
+                    </span> 
+                @endif
+                @if (session('resultType') == 'error')
+                    <span class="alert-inner--icon">
+                        <span class="fas fa-exclamation-circle"></span>
+                    </span> 
+                    <span class="alert-inner--text">
+                        <strong>Oh Snap!</strong>
+                        {{session()->pull('mainResult')}}
+                    </span> 
+                @endif
+                <button type="button" class="close" style="top: 28%;right:0.5rem;" data-dismiss="alert" aria-label="Close" @click="show = !show">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        </div>
+    @endif
+
     @include('layout.member.profileProgress')
     @if ($completeProgress)
     <!-- Hero -->
         @if ($member_info)
             <div 
-                id="Carousel3" class="carousel slide"
-                @if ($preAlert)
-                    @if ($slide_enable)
-                        data-ride="carousel" data-target="Carousel3"
-                    @endif
+                 @if ($preAlert)
+                    id="Carousel3" class="carousel slide"
+                    data-ride="carousel" data-target="Carousel3"
                 @endif
             >
                 <div class="carousel-inner rounded">
                     <div 
-                        @if ($active_screen == 1)
-                            class="carousel-item active"
-                        @else
-                            class="carousel-item"
-                        @endif
+                        class="carousel-item active"
                     >
                         @include('layout.member.page.first')
                     </div>
-                    <div 
-                        @if ($active_screen == 2)
-                            class="carousel-item active"
-                        @else
-                            class="carousel-item"
-                        @endif
-                    >
-                        @include('layout.member.page.second')
-                    </div>
                     @if ($viewPreAlert)
                         <div 
-                            @if ($active_screen == 3)
-                                class="carousel-item active"
-                            @else
-                                class="carousel-item"
-                            @endif
+                            class="carousel-item"
+                        >
+                            @include('layout.member.page.second')
+                        </div>
+                    @endif
+                    @if ($viewPackage)
+                        <div 
+                            class="carousel-item"
+                        >
+                            @include('layout.member.page.second')
+                        </div>
+                    @endif
+                    @if ($viewTransit)
+                        <div 
+                            class="carousel-item"
+                        >
+                            @include('layout.member.page.second')
+                        </div>
+                    @endif
+                    @if ($viewDelivery)
+                        <div 
+                            class="carousel-item"
                         >
                             @include('layout.member.page.second')
                         </div>
@@ -44,7 +74,7 @@
                 </div>
             </div>
             @if ($preAlert)
-                @if ($slide_enable)
+                @if ($viewPreAlert || $viewPackage || $viewTransit || $viewDelivery)
                     <button class="btn btn-icon-only btn-pill btn-facebook carousel-control-prev main-arrow-left" type="button" aria-label="facebook button" title="facebook button">
                         <a class="" href="#Carousel3" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -89,6 +119,48 @@
                     @livewire('member.createprealert')
                 </x-slot>
             </x-modal>
+            <button wire:click='enableSlide({{$viewPackage_id}})' class="btn btn-pill btn-facebook btn_in flex package-badge" >
+                <span><i class="fas fa-box-open" style="font-size: 23px"></i></span>
+                <div class="btn_out ml-2">
+                    Activate Package Slide
+                </div>
+            </button>
+            <button class="btn btn-pill btn-facebook btn_in flex transit-badge" type="button" aria-label="facebook button" title="facebook button">
+                <span class="fas fa-stopwatch" style="font-size: 29px"></span>
+                <div class="btn_out ml-2">
+                    Activate Transit Slide
+                </div>
+            </button>
+            @if ($viewPreAlert || $viewPackage || $viewTransit || $viewDelivery)
+                <button class="btn btn-pill btn-facebook btn_in flex delete-badge" type="button" aria-label="facebook button" title="facebook button">
+                    <i class="fab fa-buffer" style="font-size: 29px"></i>
+                    <div class="btn_out ml-2">
+                        <span class="mb-4"><strong>Deactivate Slide's</strong></span>
+                        <div class="btn_out_list">
+                            @if ($viewPreAlert)
+                                <div class="btn btn-pill btn-facebook m-1">
+                                    <span>Pre-alert slide</span>
+                                </div>
+                            @endif
+                            @if ($viewPackage)
+                                <div class="btn btn-pill btn-facebook m-1">
+                                    <span>Product slide</span>
+                                </div>
+                            @endif
+                            @if ($viewTransit)
+                                <div class="btn btn-pill btn-facebook m-1">
+                                    <span>Transit slide</span>
+                                </div>
+                            @endif
+                            @if ($viewDelivery)
+                                <div class="btn btn-pill btn-facebook m-1">
+                                    <span>Delivery slide</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </button>
+            @endif
         @else
         Something Went wrong
         @endif

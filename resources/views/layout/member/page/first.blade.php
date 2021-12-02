@@ -39,7 +39,7 @@
                             <i class="fas fa-box-open" style="font-size: 34px"></i>
                         </div>
                         <div class="shadow-soft rounded border border-light py-4">
-                            <span class="counter h1 d-block">15</span>
+                            <span class="counter h1 d-block">0</span>
                             <span class="h5">Package</span>
                         </div>
                     </div>
@@ -48,7 +48,23 @@
                             <span class="fas fa-stopwatch"></span>
                         </div>
                         <div class="shadow-soft rounded border border-light py-4">
-                            <span class="counter h1 d-block">15</span>
+                            <span class="counter h1 d-block">
+                                @if ($preAlert)
+                                    @php
+                                        $counTrans = 0;
+                                    @endphp
+                                    @foreach ($preAlert as $item)
+                                        @if ($item['status'] == 2)
+                                            @php
+                                                ++$counTrans;
+                                            @endphp
+                                        @endif
+                                    @endforeach
+                                    {{$counTrans}}
+                                @else
+                                    0
+                                @endif
+                            </span>
                             <span class="h5">Transit</span>
                         </div>
                     </div>
@@ -64,7 +80,13 @@
                             </svg>
                         </div>
                         <div class="shadow-soft rounded border border-light py-4">
-                            <span class="counter h1 d-block">{{count($preAlert)}}</span>
+                            <span class="counter h1 d-block">
+                                @if ($preAlert)
+                                    {{count($preAlert)}}
+                                @else
+                                    0
+                                @endif
+                            </span>
                             <span class="h5">Pre-Alert</span>
                         </div>
                     </div>
@@ -73,7 +95,7 @@
                             <span class="fas fa-shipping-fast"></span>
                         </div>
                         <div class="shadow-soft rounded border border-light py-4">
-                            <span class="counter h1 d-block">15</span>
+                            <span class="counter h1 d-block">0</span>
                             <span class="h5">Delivered</span>
                         </div>
                     </div>
@@ -83,82 +105,16 @@
                 <div class="card bg-primary shadow-inset border-light vh-75 mt-4">
                     <div class="card-body">
                         @if ($preAlert)
-                            {{-- <div id="Carousel2" class="carousel slide shadow-soft border border-light rounded" data-ride="carousel" data-target="Carousel2">
-                                <div class="carousel-inner rounded">
-                                    @php
-                                    $count = 1;
-                                    @endphp
-                                    @foreach ($preAlert as $item)
-                                        @if ($count == 1)
-                                            @php
-                                                $class = 'carousel-item active';
-                                            @endphp
-                                        @else
-                                            @php
-                                                $class = 'carousel-item';
-                                            @endphp
-                                        @endif
-                                        <div class="{{$class}}">
-                                            <div class="card bg-primary shadow-soft border-light">
-                                                <div class="card-header border-bottom text-center">
-                                                    <span class="d-block">
-                                                        <span class="display-1 font-weight-bold">
-                                                            <span class="align-top font-medium">$</span>{{$item['invoice_total']}}
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                                <div class="card-body ml-4">
-                                                    <p>Package Name: {{$item['package_nm']}}</p>
-                                                    <div class="flex">
-                                                        <ul class="list-unstyled mb-4">
-                                                            <li class="list-item pb-2">
-                                                                <strong>Track #:</strong> {{$item['track_nm']}}
-                                                            </li>
-                                                            <li class="list-item pb-2">
-                                                                <strong>Courier:</strong> {{$item['courier']}}
-                                                            </li>
-                                                            <li class="list-item">
-                                                                <strong>Shipper:</strong> {{$item['shipper']}}
-                                                            </li>
-                                                        </ul>
-                                                        <ul class="list-unstyled mb-4 ml-4">
-                                                            <li class="list-item pb-2">
-                                                                <strong>Weight:</strong> {{$item['weight']}}
-                                                            </li>
-                                                            <li class="list-item pb-2">
-                                                                <strong>Content:</strong> {{$item['content']}}
-                                                            </li>
-                                                            @if ($item['promo'])
-                                                            <li class="list-item">
-                                                                <strong>Promo:</strong> {{$item['package_nm']}}
-                                                            </li>
-                                                            @endif
-                                                        </ul>
-                                                    </div>
-                                                    <button type="button" class="btn btn-primary btn-block">
-                                                        <span class="fas fa-cart-plus mr-3"></span>Add to Cart
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @php
-                                            ++$count;
-                                        @endphp
-                                    @endforeach
-                                </div>
-                                <a class="carousel-control-prev" href="#Carousel2" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#Carousel2" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div> --}}
+                            @if (count($preAlert))
+                                
+                            @else
+                                
+                            @endif
                             @include('layout.member.page.firstinnercarousel')
                         @else
                             <div class="flex">
                                 <h3 class="h4 card-title position-relative top-2">No Pre-Alert Created</h3>
+                                <h4 class="h4 card-title">No Pre-Alert Created</h4>
                             </div>
                         @endif
                     </div>

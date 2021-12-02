@@ -2,46 +2,33 @@
 
 namespace App\Http\Livewire\Member;
 
+use Illuminate\Http\Request;
 use Livewire\Component;
 
 class Index extends Component
 {
     public $completeProgress;
     public $progress;
-    public 
-    $member,
-    $member_info,
-    $preAlert,
-    $edit_nm,
-    $nm,
-    $edit_dob,
-    $dob,
-    $edit_org,
-    $org,
-    $t_c,
-    $p_p,
-    $edit_email,
-    $email,
-    $edit_number,
-    $number,
-    $edit_address,
-    $address,
-    $edit_trn,
-    $trn,
-    $viewPreAlert,
-    $active_screen = 1,
-    $slide_enable = true;
+    public $member,$member_info,$preAlert,
+    $edit_nm,$nm,$edit_dob,$dob,$edit_org,
+    $org,$t_c,$p_p,$edit_email,$email,$edit_number,
+    $number,$edit_address,$address,$edit_trn,$trn,
+    $viewPreAlert,$viewPackage,$viewTransit,$viewDelivery,
+    $viewPreAlert_id,$viewPackage_id,$viewTransit_id,
+    $viewDelivery_id,$activity,$active_screen = 1;
 
     protected $listeners =[
-        'refreshField'=>'refreshField',
-        'openModal',
+        'refreshField'=>'refreshField'
     ];
 
     public function render()
     {
         $this->setMember();
-        // dd($this->member);
+
         if ($this->member) {
+
+            if ($this->member['name']){
+            }
             if ($this->member['profile_prog'] < 100) {
                 $this->completeProgress = false;
                 $this->progress = $this->member['profile_prog'];
@@ -58,10 +45,14 @@ class Index extends Component
                         $this->mainResult = 'Something went wrong when generating address';
                     }
                 }
+
                 $this->preAlert = $this->getPreAlert();
-                // dd($this->preAlert);
+                $this->Slide();
+                $this->activity();
                 $this->progress = $this->member['profile_prog'];
             }
+
+
         }
 
         return view('livewire.member.index');
@@ -295,13 +286,61 @@ class Index extends Component
         
     }
 
-    public function viewPreAlert($id){
-        $this->viewPreAlert = true;
-        // $this->slide_enable = false;
-        $this->active_screen = 3;
-        // in_array()
-        // $this->emit('viewPreAlert',$id);
-        // array_push()
+    public function enableSlide($id){
+        $fields = [
+            'id'=>$id,
+            'status'=>'1',
+            'umi'=>session('UMI')
+        ];
+        $sent = curl(''.domain('8080').'/api/member/updateslide','POST',$fields);
+        isset($sent['success'])
+            ? redirecto('member.dashboard')->with([
+                'mainResult'=>'Package Slide Enabled',
+                'resultType'=>'success'
+            ])
+            : redirecto('member.dashboard')->with([
+                'mainResult'=>$sent['error'],
+                'resultType'=>'error'
+            ]);
     }
+
+    public function Slide(){
+        $slide = curl(''.domain('8080').'/api/member/slide','GET');
+        foreach ($slide['success'] as $item) {
+            if ($item['name'] == 'prealert') {
+                if ($item['status'] == '1') {
+                    $this->viewPreAlert = true;
+                }
+                $this->viewPreAlert_id = $item['id'];
+            }
+            if ($item['name'] == 'package') {
+                if ($item['status'] == '1') {
+                    $this->viewPackage = true;
+                }
+                $this->viewPackage_id = $item['id'];
+            }
+            if ($item['name'] == 'transit') {
+                if ($item['status'] == '1') {
+                    $this->viewTransit = true;
+                }
+                $this->viewTransit_id = $item['id'];
+            }
+            if ($item['name'] == 'delivery') {
+                if ($item['status'] == '1') {
+                    $this->viewDelivery = true;
+                }
+                $this->viewDelivery_id = $item['id'];
+            }
+        }
+    }
+
+    public function activity(){
+        $activity = curl(''.domain('8080').'/api/member/activity','GET');
+        // dd($activity);
+        isset($activity['success'])
+            ? $this->activity = $activity['success']
+            : $this->activity = false;
+    }
+
 
 }

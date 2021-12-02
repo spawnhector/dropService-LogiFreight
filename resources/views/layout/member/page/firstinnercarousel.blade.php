@@ -246,7 +246,7 @@
                     @endphp
                 @endif
                 <div class="{{$class}}">
-                    <div class="card bg-primary border-light">
+                    <div class="card bg-primary shadow-inset border-light">
                         <div class="card-header border-bottom text-center">
                             <span class="d-block">
                                 <span class="display-1 font-weight-bold">
@@ -282,12 +282,6 @@
                                     @endif
                                 </ul>
                             </div>
-                            <button wire:click='viewPreAlert({{$item['id']}})' onclick="" type="button" class="btn btn-primary btn-block">
-                                View
-                            </button>
-                            <script>
-                                changeSlide1();
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -300,6 +294,7 @@
         <div class="arrow arrow-right"></div>
     </div>
 </div>
+<span class="ml-2" style="position: relative;top:-60px">We use an agile approach to test assumptions and connect with the needs of your audience early and often. Technology enables great experiences.</span>
 <script>
     /*
      * We trigger the factory() function is different
@@ -461,7 +456,7 @@
 
         //  note: add back "indicators" to <ul class> to get back the indicator 
         Zippy.prototype.build = function() {
-            var $indicators = this.$el.append('<ul class="indicators" >').find('.indicators');
+            var $indicators = this.$el.append('<ul hidden class="indicators" >').find('.indicators');
             this.totalSlide1s = this.$el.find('.slide1').length;
             for (var i = 0; i < this.totalSlide1s; i++) $indicators.append('<li data-index=' + i + '>');
         };

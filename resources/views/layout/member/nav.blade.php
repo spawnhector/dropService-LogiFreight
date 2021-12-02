@@ -145,28 +145,6 @@
                 </li> --}}
             </ul>
         </div>
-        <button type="button" class="btn btn-primary mr-3">Notifications <span class="badge badge-pill badge-success">5</span> <span class="sr-only">unread messages</span></button>
-        <div class="btn-group mr-2 ">
-            <span type="button" class="btn btn-primary" style="display: flex">
-                <span class="btn btn-xs btn-circle btn-icon-only btn-soft">
-                    <span class="fa fa-user"></span>
-                </span>
-                <p class="font-small m-0 pl-2">John Doe</p>
-            </span> 
-            <span type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-target="drp2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="fas fa-angle-down dropdown-arrow" ></span> 
-                <span class="sr-only">Toggle Dropdown</span>
-            </span>
-            <div class="dropdown-menu dropdown-menu-md" id="drp1" aria-labelledby="dropdownMenuButton">
-                <h2 class="h6 dropdown-header">Hi, John Doe</h2>
-                <a class="dropdown-item" href="#">My profile</a> 
-                <a class="dropdown-item" href="#">Dashboard</a> 
-                <a class="dropdown-item" href="#">Settings</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                    <span class="fas fa-sign-out-alt mr-2"></span>Sign out
-                </a>
-            </div>
-        </div>
+        @livewire('member.nav')
     </div>
 </nav>
