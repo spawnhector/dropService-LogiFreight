@@ -2,21 +2,21 @@
     <div class="row mb-5">
         <div class="col-12 col-md-6">
             <div class="form-group mb-4">
-                <input wire:model='package_nm' type="text" class="form-control" id="exampleInputEmail67" aria-describedby="emailHelp" placeholder="Package Name"> 
+                <input wire:model='package_nm' type="text" class="form-control" aria-describedby="emailHelp" placeholder="Package Name"> 
             </div>
             <div class="form-group mb-4">
-                <input wire:model='track_no' type="text" class="form-control" id="exampleInputEmail67" aria-describedby="emailHelp" placeholder="Tracking No."> 
+                <input wire:model='track_no' type="text" class="form-control" aria-describedby="emailHelp" placeholder="Tracking No."> 
             </div>
             <div class="form-group mb-4">
-                <input wire:model='shipper' type="text" class="form-control" id="exampleInputEmail67" aria-describedby="emailHelp" placeholder="Shipper"> 
+                <input wire:model='shipper' type="text" class="form-control" aria-describedby="emailHelp" placeholder="Shipper"> 
             </div>
             <div class="form-group mb-4">
-                <input wire:model='contents' type="text" class="form-control" id="exampleInputEmail67" aria-describedby="emailHelp" placeholder="Choose Content"> 
+                <input wire:model='contents' type="text" class="form-control" aria-describedby="emailHelp" placeholder="Choose Content"> 
             </div>
         </div>
         <div class="col-12 col-md-6">
             <div class="form-group mb-4">
-                <input wire:model='invoice_total' type="text" class="form-control" id="exampleInputEmail67" aria-describedby="emailHelp" placeholder="Invoice Total"> 
+                <input wire:model='invoice_total' type="text" class="form-control" aria-describedby="emailHelp" placeholder="Invoice Total"> 
             </div>
             <div class="form-group  mb-4">
                 <select wire:model='courier' class="custom-select mr-sm-2" id="inlineFormCustomSelectPref">
@@ -39,10 +39,10 @@
                 </select>
             </div>
             <div class="form-group mb-4">
-                <input wire:model='weight' type="text" class="form-control" id="exampleInputEmail67" aria-describedby="emailHelp" placeholder="Weight Lbs"> 
+                <input wire:model='weight' type="text" class="form-control" aria-describedby="emailHelp" placeholder="Weight Lbs"> 
             </div>
             <div class="form-group mb-4">
-                <input wire:model='promo_code' type="text" class="form-control" id="exampleInputEmail67" aria-describedby="emailHelp" placeholder="Promotional Code (Optional)"> 
+                <input wire:model='promo_code' type="text" class="form-control" aria-describedby="emailHelp" placeholder="Promotional Code (Optional)"> 
             </div>
         </div>
     </div>
@@ -62,6 +62,8 @@
     </div>
     <div class="flex">
         <button wire:click='createPreAlert()' type="submit" class="btn btn-pill btn-primary mt-4" type="button">Create Pre-Alert</button>
+        {{-- <span  wire:target="slideSetting" wire:loading.class.remove="fas fa-cog" class="fas fa-cog"></span> --}}
+        <span  wire:target="createPreAlert" wire:loading.class="loader" class=""></span>
         <button class="btn btn-pill btn-primary mt-4 ml-2" type="button">Cancel</button>
     </div>
 </div>

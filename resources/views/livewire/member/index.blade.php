@@ -1,7 +1,7 @@
 <div>
     @if (session()->has('mainResult'))
-        <div x-data="{ show: true }">
-            <div  x-show="show" class="alert alert-success alert-dismissible shadow-soft fade show pop-alert" role="alert">
+        <div x-data="{ alert: true }">
+            <div  x-show="alert" class="alert alert-success alert-dismissible shadow-soft fade show pop-alert" role="alert">
                 @if (session('resultType') == 'success')
                     <span class="alert-inner--icon">
                         <span class="far fa-thumbs-up"></span>
@@ -123,6 +123,8 @@
                 <span><i class="fas fa-box-open" style="font-size: 23px"></i></span>
                 <div class="btn_out ml-2">
                     Activate Package Slide
+                    {{-- <span  wire:target="slideSetting" wire:loading.class.remove="fas fa-cog" class="fas fa-cog"></span> --}}
+                    <span  wire:target="enableSlide" wire:loading.class="loader" class=""></span>
                 </div>
             </button>
             <button class="btn btn-pill btn-facebook btn_in flex transit-badge" type="button" aria-label="facebook button" title="facebook button">
@@ -131,30 +133,90 @@
                     Activate Transit Slide
                 </div>
             </button>
-            @if ($viewPreAlert || $viewPackage || $viewTransit || $viewDelivery)
+            @if ($slideEnable)
                 <button class="btn btn-pill btn-facebook btn_in flex delete-badge" type="button" aria-label="facebook button" title="facebook button">
                     <i class="fab fa-buffer" style="font-size: 29px"></i>
                     <div class="btn_out ml-2">
-                        <span class="mb-4"><strong>Deactivate Slide's</strong></span>
+                        <span class="mb-4"><strong>@if ($slideSettingNm) {{$slideSettingNm}} @endif Slide Setting</strong></span>
                         <div class="btn_out_list">
-                            @if ($viewPreAlert)
-                                <div class="btn btn-pill btn-facebook m-1">
-                                    <span>Pre-alert slide</span>
+                            @if ($slideSetting)
+                                <div>
+                                    @if ($slideSettingNm == 'Pre-alert' && $viewPreAlert_disable)
+                                        <div class="custom-control custom-switch">
+                                            <input wire:click='enableSlide({{$viewPreAlert_id}},true)' type="checkbox" class="custom-control-input" id="{{$slideSettingNm}}"> 
+                                            <label class="custom-control-label" for="{{$slideSettingNm}}">Enable this slide</label>
+                                            <span  wire:target="enableSlide" wire:loading.class="loader" class=""></span>
+                                        </div>
+                                    @endif
+                                    @if ($slideSettingNm == 'Pre-alert' && !$viewPreAlert_disable)
+                                        <div class="custom-control custom-switch">
+                                            <input wire:click='disableSlide({{$viewPreAlert_id}})' type="checkbox" checked class="custom-control-input" id="{{$slideSettingNm}}"> 
+                                            <label class="custom-control-label" for="{{$slideSettingNm}}">Disable this slide</label>
+                                            <span  wire:target="disableSlide" wire:loading.class="loader" class=""></span>
+                                        </div>
+                                    @endif
+                                    @if ($slideSettingNm == 'Package' && $viewPackage_disable)
+                                        <div class="custom-control custom-switch">
+                                            <input wire:click='enableSlide({{$viewPreAlert_id}})' type="checkbox" class="custom-control-input" id="{{$slideSettingNm}}"> 
+                                            <label class="custom-control-label" for="{{$slideSettingNm}}">Enable this slide</label>
+                                            <span  wire:target="enableSlide" wire:loading.class="loader" class=""></span>
+                                        </div>
+                                    @endif
+                                    @if ($slideSettingNm == 'Package' && !$viewPackage_disable)
+                                        <div class="custom-control custom-switch">
+                                            <input wire:click='disableSlide({{$viewPackage_id}})' type="checkbox" checked class="custom-control-input" id="{{$slideSettingNm}}"> 
+                                            <label class="custom-control-label" for="{{$slideSettingNm}}">Disable this slide</label>
+                                            <span  wire:target="disableSlide" wire:loading.class="loader" class=""></span>
+                                        </div>
+                                    @endif
+                                    @if ($slideSettingNm == 'Transit' && $viewTransit_disable)
+                                        <div class="custom-control custom-switch">
+                                            <input wire:click='enableSlide({{$viewTransit_id}},true)' type="checkbox" class="custom-control-input" id="{{$slideSettingNm}}"> 
+                                            <label class="custom-control-label" for="{{$slideSettingNm}}">Enable this slide</label>
+                                            <span  wire:target="enableSlide" wire:loading.class="loader" class=""></span>
+                                        </div>
+                                    @endif
+                                    @if ($slideSettingNm == 'Transit' && !$viewTransit_disable)
+                                        <div class="custom-control custom-switch">
+                                            <input wire:click='disableSlide({{$viewTransit_id}})' type="checkbox" checked class="custom-control-input" id="{{$slideSettingNm}}"> 
+                                            <label class="custom-control-label" for="{{$slideSettingNm}}">Disable this slide</label>
+                                            <span  wire:target="disableSlide" wire:loading.class="loader" class=""></span>
+                                        </div>
+                                    @endif
                                 </div>
                             @endif
-                            @if ($viewPackage)
-                                <div class="btn btn-pill btn-facebook m-1">
-                                    <span>Product slide</span>
-                                </div>
-                            @endif
-                            @if ($viewTransit)
-                                <div class="btn btn-pill btn-facebook m-1">
-                                    <span>Transit slide</span>
-                                </div>
-                            @endif
-                            @if ($viewDelivery)
-                                <div class="btn btn-pill btn-facebook m-1">
-                                    <span>Delivery slide</span>
+                            @if (!$slideSetting)
+                                <div class="btn_out_list">
+                                    @if ($viewPreAlert || $viewPreAlert_disable)
+                                        <div class="btn btn-pill btn-facebook m-1">
+                                            <span>Pre-alert slide
+                                                <span wire:click="slideSetting('{{$viewPreAlert_id}}','Pre-alert')" class="btn btn-icon-only btn-pill btn-behance" aria-label="behance button" title="behance button">
+                                                    <span  wire:target="slideSetting" wire:loading.class.remove="fas fa-cog" class="fas fa-cog"></span>
+                                                    <span  wire:target="slideSetting" wire:loading.class="loader" class=""></span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    @endif
+                                    @if ($viewPackage)
+                                        <div class="btn btn-pill btn-facebook m-1">
+                                            <span>Package slide
+                                                <span wire:click="slideSetting('{{$viewPackage_id}}','Package')" class="btn btn-icon-only btn-pill btn-behance" aria-label="behance button" title="behance button">
+                                                    <span  wire:target="slideSetting" wire:loading.class.remove="fas fa-cog" class="fas fa-cog"></span>
+                                                    <span  wire:target="slideSetting" wire:loading.class="loader" class=""></span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    @endif
+                                    @if ($viewTransit)
+                                        <div class="btn btn-pill btn-facebook m-1">
+                                            <span>Transit slide</span>
+                                        </div>
+                                    @endif
+                                    @if ($viewDelivery)
+                                        <div class="btn btn-pill btn-facebook m-1">
+                                            <span>Delivery slide</span>
+                                        </div>
+                                    @endif
                                 </div>
                             @endif
                         </div>

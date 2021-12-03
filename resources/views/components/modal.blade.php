@@ -1,19 +1,35 @@
 <div>
-    
-    <button 
-        @if (isset($hidden))
-            {{$hidden}}
-        @endif 
-        @if (isset($style))
-            style="{{$style}}"
-        @endif
-        class="{{$btn_class}}" 
-        data-toggle="modal" 
-        data-target="#{{$modal_nm}}" 
-        type="button"
-    >
-        {{$button}}
-    </button> 
+    @if (isset($span))
+        <span 
+            @if (isset($hidden))
+                {{$hidden}}
+            @endif 
+            @if (isset($style))
+                style="{{$style}}"
+            @endif
+            class="{{$btn_class}}" 
+            data-toggle="modal" 
+            data-target="#{{$modal_nm}}" 
+            type="button"
+        >
+            {{$button}}
+        </span> 
+    @else
+        <button 
+            @if (isset($hidden))
+                {{$hidden}}
+            @endif 
+            @if (isset($style))
+                style="{{$style}}"
+            @endif
+            class="{{$btn_class}}" 
+            data-toggle="modal" 
+            data-target="#{{$modal_nm}}" 
+            type="button"
+        >
+            {{$button}}
+        </button> 
+    @endif
     <div 
     class="modal fade" 
     id="{{$modal_nm}}" tabindex="-1" role="dialog" aria-labelledby="{{$modal_nm}}"

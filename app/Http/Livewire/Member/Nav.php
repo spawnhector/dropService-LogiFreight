@@ -9,9 +9,14 @@ class Nav extends Component
 {
     public $member;
 
-    public function render()
+
+    public function mount()
     {
         $this->setMember();
+    }
+    
+    public function render()
+    {
         return view('livewire.member.nav');
     }
 

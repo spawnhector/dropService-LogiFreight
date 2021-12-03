@@ -1,4 +1,4 @@
-<footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">
+{{-- <footer class="d-flex pb-5 pt-6 pt-md-7 border-top border-light bg-primary">
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
@@ -109,4 +109,4 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> --}}

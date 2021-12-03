@@ -105,16 +105,16 @@
                 <div class="card bg-primary shadow-inset border-light vh-75 mt-4">
                     <div class="card-body">
                         @if ($preAlert)
-                            @if (count($preAlert))
-                                
+                            @if (count($preAlert) < 2)
+                                <div class="flex">
+                                    <h3 class="h4 card-title position-relative top-2">Create two or more pre-alert to enable this slide</h3>
+                                </div>
                             @else
-                                
+                                @include('layout.member.page.firstinnercarousel')
                             @endif
-                            @include('layout.member.page.firstinnercarousel')
                         @else
                             <div class="flex">
                                 <h3 class="h4 card-title position-relative top-2">No Pre-Alert Created</h3>
-                                <h4 class="h4 card-title">No Pre-Alert Created</h4>
                             </div>
                         @endif
                     </div>

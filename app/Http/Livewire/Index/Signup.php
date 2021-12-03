@@ -70,9 +70,13 @@ class Signup extends Component
     }
 
     
-    public function render()
+    public function mount()
     {
         $this->checkVal();
+    }
+
+    public function render()
+    {
         return view('livewire.index.signup');
     }
 }

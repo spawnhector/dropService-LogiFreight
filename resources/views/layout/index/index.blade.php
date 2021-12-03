@@ -44,12 +44,12 @@
         @yield('body')
     </main>
 
-    <a id="producthunt-badge"
+    {{-- <a id="producthunt-badge"
         href="https://www.producthunt.com/posts/neumorphism-ui?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-neumorphism-ui"
         target="_blank"><img
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=200908&theme=dark"
             alt="Neumorphism UI - Neumorphism inspired UI web components, sections and pages | Product Hunt Embed"
-            style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
+            style="width: 250px; height: 54px;" width="250px" height="54px" /></a> --}}
 
     @include('layout.index.footer')
 

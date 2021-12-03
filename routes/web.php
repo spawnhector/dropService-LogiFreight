@@ -23,3 +23,9 @@ Route::middleware('member')->group(function(){
     })->name('member.dashboard');
 });
 
+Route::middleware('admin')->group(function(){
+    Route::get('/dashboard', function () {
+        return view('admin.body');
+    })->name('admin.dashboard');
+});
+

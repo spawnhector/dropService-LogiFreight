@@ -31,6 +31,14 @@
                 <a href="#" class="small text-right">Lost password?</a>
             </div>
         </div>
+        <div class="d-block d-sm-flex justify-content-between align-items-center mb-4">
+            <div>
+                <div class="custom-control custom-switch">
+                    <input wire:model='adminLogin' type="checkbox" class="custom-control-input" id="adminlogin"> 
+                    <label class="custom-control-label" for="adminlogin"><strong>Admin Login</strong></label>
+                </div>
+            </div>
+        </div>
     </div>
     <button wire:click="signin()" type="submit" class="btn btn-block btn-primary">Sign in</button>
     <div class="mt-3 mb-4 text-center">

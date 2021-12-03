@@ -3,9 +3,8 @@
 namespace App\Http\Livewire\Member;
 
 use Livewire\Component;
-use App\Http\Livewire\Member\Index;
 
-class Setaddress extends Index
+class Setaddress extends Component
 {
     public 
     $country,
@@ -14,11 +13,14 @@ class Setaddress extends Index
     $district,
     $emptyAddField = true,
     $postal;
+    public function mount()
+    {
+        // $this->setMember();
+        $this->checkAddVal();
+    }
 
     public function render()
     {
-        $this->setMember();
-        $this->checkAddVal();
         return view('livewire.member.setaddress');
     }
     

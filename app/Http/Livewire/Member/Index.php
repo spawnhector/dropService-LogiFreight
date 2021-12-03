@@ -7,21 +7,47 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $completeProgress;
-    public $progress;
-    public $member,$member_info,$preAlert,
+
+    public 
+    // -------------------------------------//
+    // Variables for profile
+    // -------------------------------------//
+    $member,$member_info,$progress,
+    $completeProgress,$preAlert,$activity,
+    $active_screen = 1,
+    // -------------------------------------//
+    // Variables for profile complete
+    // -------------------------------------//
     $edit_nm,$nm,$edit_dob,$dob,$edit_org,
-    $org,$t_c,$p_p,$edit_email,$email,$edit_number,
-    $number,$edit_address,$address,$edit_trn,$trn,
-    $viewPreAlert,$viewPackage,$viewTransit,$viewDelivery,
-    $viewPreAlert_id,$viewPackage_id,$viewTransit_id,
-    $viewDelivery_id,$activity,$active_screen = 1;
+    $org,$t_c,$p_p,$edit_email,$email,
+    $edit_number,$number,$edit_address,
+    $address,$edit_trn,$trn,
+    // -------------------------------------//
+    // Variables for slide view
+    // -------------------------------------//
+    $viewPreAlert,$viewPackage,$viewTransit,
+    $viewDelivery,$viewPreAlert_id,$viewPackage_id,
+    $viewTransit_id,$viewDelivery_id,$viewPreAlert_disable,
+    $viewPackage_disable,$viewTransit_disable,
+    $viewDelivery_disable,
+    // -------------------------------------//
+    // Variables for slide setting
+    // -------------------------------------//
+    $slideSettingId,$slideSettingNm,$slideSetting=false,
+    $slideSettingBtn=true,$slideEnable,
+    // -------------------------------------//
+    // to separate each toggle btn
+    // -------------------------------------//
+    $preAlertToggle,$packageToggle,$transitToggle,
+    $preAlertSettingToggle,$packageSettingToggle,
+    $transitSettingToggle;
 
     protected $listeners =[
-        'refreshField'=>'refreshField'
+        'refreshField'=>'refreshField',
+        '$refresh',
     ];
 
-    public function render()
+    public function mount()
     {
         $this->setMember();
 
@@ -51,10 +77,11 @@ class Index extends Component
                 $this->activity();
                 $this->progress = $this->member['profile_prog'];
             }
-
-
         }
+    }
 
+    public function render()
+    {
         return view('livewire.member.index');
     }
 
@@ -286,22 +313,60 @@ class Index extends Component
         
     }
 
-    public function enableSlide($id){
+    public function enableSlide($id,$bypass = null){
+        if ($bypass) {
+            $fields = [
+                'id'=>$id,
+                'status'=>'1',
+                'bypass'=>'true',
+                'umi'=>session('UMI')
+            ];
+        }else{
+            $fields = [
+                'id'=>$id,
+                'status'=>'1',
+                'umi'=>session('UMI')
+            ];
+        }
+        $sent = curl(''.domain('8080').'/api/member/enableslide','POST',$fields);
+        if(isset($sent['success'])){
+            redirecto('member.dashboard')->with([
+                'mainResult'=>'Slide Enabled',
+                'resultType'=>'success'
+            ]);
+        }else{
+            if(isset($sent['error'])){
+                session(['mainResult' => $sent['error']]);
+                session(['resultType'=>'error']);
+            }else{
+                session(['mainResult' => 'Something went wrong!']);
+                session(['resultType'=>'error']);
+            }
+        }
+    }
+
+    public function disableSlide($id){
         $fields = [
             'id'=>$id,
-            'status'=>'1',
+            'status'=>'3',
             'umi'=>session('UMI')
         ];
-        $sent = curl(''.domain('8080').'/api/member/updateslide','POST',$fields);
-        isset($sent['success'])
-            ? redirecto('member.dashboard')->with([
-                'mainResult'=>'Package Slide Enabled',
+        $sent = curl(''.domain('8080').'/api/member/disableslide','POST',$fields);
+        if(isset($sent['success'])){
+            redirecto('member.dashboard')->with([
+                'mainResult'=>'Slide Disabled',
                 'resultType'=>'success'
-            ])
-            : redirecto('member.dashboard')->with([
-                'mainResult'=>$sent['error'],
-                'resultType'=>'error'
             ]);
+        }else{
+            if(isset($sent['error'])){
+                session(['mainResult' => $sent['error']]);
+                session(['resultType'=>'error']);
+            }else{
+                session(['mainResult' => 'Something went wrong!']);
+                session(['resultType'=>'error']);
+            }
+        }
+            
     }
 
     public function Slide(){
@@ -310,28 +375,55 @@ class Index extends Component
             if ($item['name'] == 'prealert') {
                 if ($item['status'] == '1') {
                     $this->viewPreAlert = true;
+                    $this->slideEnable = true;
+                }
+                if ($item['status'] == '3') {
+                    $this->slideEnable = true;
+                    $this->viewPreAlert_disable = true;
                 }
                 $this->viewPreAlert_id = $item['id'];
             }
             if ($item['name'] == 'package') {
                 if ($item['status'] == '1') {
                     $this->viewPackage = true;
+                    $this->slideEnable = true;
+                }
+                if ($item['status'] == '3') {
+                    $this->slideEnable = true;
+                    $this->viewPackage_disable = true;
                 }
                 $this->viewPackage_id = $item['id'];
             }
             if ($item['name'] == 'transit') {
                 if ($item['status'] == '1') {
                     $this->viewTransit = true;
+                    $this->slideEnable = true;
+                }
+                if ($item['status'] == '3') {
+                    $this->slideEnable = true;
+                    $this->viewTransit_disable = true;
                 }
                 $this->viewTransit_id = $item['id'];
             }
             if ($item['name'] == 'delivery') {
                 if ($item['status'] == '1') {
                     $this->viewDelivery = true;
+                    $this->slideEnable = true;
+                }
+                if ($item['status'] == '3') {
+                    $this->slideEnable = true;
+                    $this->viewDelivery_disable = true;
                 }
                 $this->viewDelivery_id = $item['id'];
             }
         }
+    }
+
+    public function slideSetting($slide,$slide_nm){
+        $this->slideSettingId = $slide;
+        $this->slideSettingNm = $slide_nm;
+        $this->slideSetting = true;
+        $this->slideSettingBtn = false;
     }
 
     public function activity(){

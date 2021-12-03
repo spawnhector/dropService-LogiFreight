@@ -8,8 +8,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <h2 class="mb-3">Become one of us</h2>
-                                <p class="mb-4">Do you want to join our team and work remotely from
-                                    anywhere you'd like? We can’t wait to hear from you!</p>
+                                <p class="mb-4">Join us and recieve a Miami Mailing Address. Get your package delivered at your door step.</p>
                                 <div class="ml-4" style="display:flex;">
                                     <div>
                                         <x-signupmodal>

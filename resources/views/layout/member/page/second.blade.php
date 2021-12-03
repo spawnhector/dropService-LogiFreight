@@ -89,7 +89,7 @@
                                             delete Pre-Alert
                                         </x-slot>
                                         <x-slot name="cardBody">
-                                            @livewire('member.createprealert')
+                                            {{-- @livewire('member.createprealert') --}}
                                         </x-slot>
                                     </x-modal>
                                 </td>
